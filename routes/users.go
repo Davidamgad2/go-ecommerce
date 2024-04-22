@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"e-commerce/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,11 +11,12 @@ func UserHandler(c *gin.Context) {
 }
 
 func InitUserRoutes(router *gin.Engine) {
+	userHandler := handlers.UserHandler{}
 	group := router.Group("/users")
 	{
-		group.GET("", UserHandler)
-		group.POST("", UserHandler)
-		group.PUT("/:id", UserHandler)
-		group.DELETE("/:id", UserHandler)
+		group.GET("", userHandler.FindUserById)
+		group.POST("", userHandler.CreateUser)
+		group.PUT("/:id", userHandler.UpdateUser)
+		group.DELETE("/:id", userHandler.DeleteUser)
 	}
 }

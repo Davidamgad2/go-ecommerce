@@ -5,11 +5,11 @@ import (
 )
 type Cart struct {
 	gorm.Model
-	cart_user []User
+	cart_user User
 	Items     []Product
 }
 
-func NewCart() *Cart {
+func (c Cart) NewCart() *Cart {
 	return &Cart{}
 }
 

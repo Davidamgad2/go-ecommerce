@@ -1,19 +1,18 @@
 package routes
 
 import (
+	"e-commerce/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
-func CartHandler(c *gin.Context) {
-	// Handle cart logic here
-}
-
 func InitCartRoutes(router *gin.Engine) {
+	cartHandler := handlers.CartHandler{} // Create an instance of CartHandler
 	group := router.Group("/carts")
 	{
-		group.GET("", CartHandler)
-		group.POST("", CartHandler)
-		group.PUT("/:id", CartHandler)
-		group.DELETE("/:id", CartHandler)
+		group.GET("", cartHandler.FindCartById)
+		group.POST("", cartHandler.CreateCart)
+		group.PUT("/:id", cartHandler.UpdateCart)
+		group.DELETE("/:id", cartHandler.DeleteCart)
 	}
 }
